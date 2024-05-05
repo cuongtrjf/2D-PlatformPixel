@@ -1,0 +1,21 @@
+unity platform
+
+lay dau vao cua unity bang cach:
+windows->package manager->unity registry->search input system
+add component player input vao player -> create actions
+-> dat ten -> behavior invoke unity event
+trong events o duoi -> chon player -> + move roi gan cac gia tri
+player va funcion move cua player trong script vao
+sau do them scrip playermovement de nhan gia tri dau vao
+
+
+neu muon them action trong input action thi click vao r add
+
+camera follow player
+windows->package manager->unity registry->search cinemachine
+
+
+
+tilemap can co:
+- tilemap collider 2D: co use composite
+- composite de lam mem cac net collider map
