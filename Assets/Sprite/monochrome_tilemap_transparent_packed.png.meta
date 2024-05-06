@@ -8590,10 +8590,10 @@ TextureImporter:
       monochrome_tilemap_transparent_packed_67: 751869078
       monochrome_tilemap_transparent_packed_31: 1926146490
       monochrome_tilemap_transparent_packed_7: -1016474301
-      monochrome_tilemap_transparent_packed_141: 1358908785
-      monochrome_tilemap_transparent_packed_235: -1748960831
       monochrome_tilemap_transparent_packed_214: -1447934124
+      monochrome_tilemap_transparent_packed_235: -1748960831
       monochrome_tilemap_transparent_packed_0: 2072619018
+      monochrome_tilemap_transparent_packed_141: 1358908785
       monochrome_tilemap_transparent_packed_284: -1290059862
       monochrome_tilemap_transparent_packed_74: -572219189
       monochrome_tilemap_transparent_packed_22: 59512764
@@ -8653,8 +8653,8 @@ TextureImporter:
       monochrome_tilemap_transparent_packed_68: 2139209124
       monochrome_tilemap_transparent_packed_266: -158080476
       monochrome_tilemap_transparent_packed_10: -523088560
-      monochrome_tilemap_transparent_packed_86: -575371859
       monochrome_tilemap_transparent_packed_163: 430395262
+      monochrome_tilemap_transparent_packed_86: -575371859
       monochrome_tilemap_transparent_packed_362: -1384362730
       monochrome_tilemap_transparent_packed_369: -1951436684
       monochrome_tilemap_transparent_packed_9: -1507267223
@@ -8672,9 +8672,9 @@ TextureImporter:
       monochrome_tilemap_transparent_packed_34: 1257343544
       monochrome_tilemap_transparent_packed_199: 1675473456
       monochrome_tilemap_transparent_packed_363: 2006574950
+      monochrome_tilemap_transparent_packed_381: 1182301587
       monochrome_tilemap_transparent_packed_317: 2144615741
       monochrome_tilemap_transparent_packed_210: 1262397611
-      monochrome_tilemap_transparent_packed_381: 1182301587
       monochrome_tilemap_transparent_packed_349: 1775290099
       monochrome_tilemap_transparent_packed_378: -1440183974
       monochrome_tilemap_transparent_packed_359: -25834869
@@ -8692,16 +8692,16 @@ TextureImporter:
       monochrome_tilemap_transparent_packed_97: -1191561258
       monochrome_tilemap_transparent_packed_259: -1623757534
       monochrome_tilemap_transparent_packed_122: 702245413
-      monochrome_tilemap_transparent_packed_202: 809711816
       monochrome_tilemap_transparent_packed_336: 1661595464
+      monochrome_tilemap_transparent_packed_202: 809711816
       monochrome_tilemap_transparent_packed_110: 778552600
       monochrome_tilemap_transparent_packed_204: 1938805649
       monochrome_tilemap_transparent_packed_102: -788427198
       monochrome_tilemap_transparent_packed_379: 317886446
       monochrome_tilemap_transparent_packed_165: 1968136526
       monochrome_tilemap_transparent_packed_30: 1997835858
-      monochrome_tilemap_transparent_packed_197: -1502314893
       monochrome_tilemap_transparent_packed_269: -1360646986
+      monochrome_tilemap_transparent_packed_197: -1502314893
       monochrome_tilemap_transparent_packed_146: -2108793067
       monochrome_tilemap_transparent_packed_5: -1281652465
       monochrome_tilemap_transparent_packed_323: 1639802729

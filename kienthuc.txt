@@ -16,6 +16,22 @@ windows->package manager->unity registry->search cinemachine
 
 
 
+add animation
+windows-> animation -> animatiom
+
+
+player can them component animator
+
+
+animation cho idle, di chuyen, nhay, slide
+trong animator can them cac lien ket giua cac aniamtion bang cach
+- chuot phai -> make transition 
+- sau do them dieu kien de chuyen doi hoat anh bang cach:
+	+ chon parameters -> add (+) float or int v.v
+can xem ki lai de hieu hon
+
+
+
 tilemap can co:
 - tilemap collider 2D: co use composite
 - composite de lam mem cac net collider map

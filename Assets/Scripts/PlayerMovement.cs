@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     private bool isFacingRight = true;
-
+    public Animator animator;
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -75,6 +75,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);//di chuyen theo phuong ngang vi co trong luc
             Flip();
         }
+
+        animator.SetFloat("yVelocity", rb.velocity.y);
+        animator.SetFloat("magnitude", rb.velocity.magnitude);
+        animator.SetBool("isWallSliding", isWallSliding);
+
     }
 
 
@@ -94,10 +99,12 @@ public class PlayerMovement : MonoBehaviour
             {//neu giu nut nhay thi se nhay cao
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
                 jumpRemaining--;
+                animator.SetTrigger("jump");
             }else if (context.canceled)
             {//neu chi nhan nhay roi tha ra thi se nhay thap
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
                 jumpRemaining--;
+                animator.SetTrigger("jump");
             }
         }
 
@@ -107,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);
             wallJumpTimer = 0;
-
+            animator.SetTrigger("jump");
             //lat khi nhay tuong vi no cung nhay sang huong nguoc lai
             if(transform.localScale.x != wallJumpDirection)
             {
