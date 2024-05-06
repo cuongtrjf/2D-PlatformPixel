@@ -32,6 +32,12 @@ can xem ki lai de hieu hon
 
 
 
+
+them effect hat khi di chuyen
+click player-> chuot phai them effect->particel system
+
+
+
 tilemap can co:
 - tilemap collider 2D: co use composite
 - composite de lam mem cac net collider map

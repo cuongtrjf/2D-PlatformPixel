@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private bool isFacingRight = true;
     public Animator animator;
+    public ParticleSystem smokeFX;
+
+
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -99,12 +102,12 @@ public class PlayerMovement : MonoBehaviour
             {//neu giu nut nhay thi se nhay cao
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
                 jumpRemaining--;
-                animator.SetTrigger("jump");
+                JumpFX();
             }else if (context.canceled)
             {//neu chi nhan nhay roi tha ra thi se nhay thap
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
                 jumpRemaining--;
-                animator.SetTrigger("jump");
+                JumpFX();
             }
         }
 
@@ -114,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);
             wallJumpTimer = 0;
-            animator.SetTrigger("jump");
+            JumpFX();
             //lat khi nhay tuong vi no cung nhay sang huong nguoc lai
             if(transform.localScale.x != wallJumpDirection)
             {
@@ -214,6 +217,11 @@ public class PlayerMovement : MonoBehaviour
             Vector3 ls = transform.localScale;//lien quan den sprite
             ls.x *= -1f;//lat sprite
             transform.localScale = ls;
+
+            if (rb.velocity.y == 0)
+            {
+                smokeFX.Play();
+            }
         }
     }
 
@@ -226,5 +234,15 @@ public class PlayerMovement : MonoBehaviour
         //check cham tuong de truot tuong doc
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(wallCheckPos.position, wallCheckSize);
+    }
+
+
+
+
+    //effect
+    private void JumpFX()
+    {
+        animator.SetTrigger("jump");
+        smokeFX.Play();
     }
 }
