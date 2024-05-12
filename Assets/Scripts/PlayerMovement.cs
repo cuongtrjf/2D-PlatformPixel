@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
             CancelInvoke(nameof(CancelWallJump));
         }else if (wallJumpTimer > 0f)
         {
-            wallJumpTimer -= Time.deltaTime;//het thoi gian nhay 
+            wallJumpTimer -= Time.fixedDeltaTime;//het thoi gian nhay 
         }
     }
 

@@ -1,6 +1,6 @@
 unity platform
 
-lay dau vao cua unity bang cach:
+1.lay dau vao cua unity bang cach:
 windows->package manager->unity registry->search input system
 add component player input vao player -> create actions
 -> dat ten -> behavior invoke unity event
@@ -11,12 +11,17 @@ sau do them scrip playermovement de nhan gia tri dau vao
 
 neu muon them action trong input action thi click vao r add
 
-camera follow player
+
+
+2.camera follow player
 windows->package manager->unity registry->search cinemachine
+khi player bi gioi han di chuyen thi han che khoang chong camera bang cach
+click camera flow->add extension->cinamachine confiner-> no se co bounding(ghan)
+
+them 1 doi tuong r add component polygon collider2d de ghan camera, edit collider
 
 
-
-add animation
+3.add animation
 windows-> animation -> animatiom
 
 
@@ -33,11 +38,16 @@ can xem ki lai de hieu hon
 
 
 
-them effect hat khi di chuyen
+4.them effect hat khi di chuyen
 click player-> chuot phai them effect->particel system
 
 
 
-tilemap can co:
+5.tilemap can co:
 - tilemap collider 2D: co use composite
 - composite de lam mem cac net collider map
+
+
+
+6. UI progressbar: tien trinh thu thap gem
+- rightclick -> UI -> Slider
