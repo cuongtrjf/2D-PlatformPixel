@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,12 +11,15 @@ public class PlayerHealth : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    public static event Action OnPlayedDied;
+
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
-        healthUI.SetMaxHearts(maxHealth);
+        ResetHealth();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        GameController.OnReset += ResetHealth;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,15 +32,27 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+
+
+
+    private void ResetHealth()//khi nhan retry thi cung reset thanh mau
+    {
+        currentHealth = maxHealth;
+        healthUI.SetMaxHearts(maxHealth);
+    }
+
+
+
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthUI.UpdateHearts(currentHealth);
         StartCoroutine(FlashRed());
 
-        if(currentHealth < 0)
+        if(currentHealth <= 0)
         {
             //gameover
+            OnPlayedDied.Invoke();
         }
     }
 

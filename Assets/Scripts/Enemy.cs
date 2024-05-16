@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
 
 
         //check player co dang o tren khong
-        bool isPlayerAbove = Physics2D.Raycast(transform.position, Vector2.up, 3f, 1 << player.gameObject.layer);
+        bool isPlayerAbove = Physics2D.Raycast(transform.position, Vector2.up, 2f, 1 << player.gameObject.layer);
         //vi sao phai dich bit, de tao ra layermask cho layer, layermask co cac bitmask de kiem tra hon
 
 
@@ -49,8 +49,8 @@ public class Enemy : MonoBehaviour
 
             //enemy jump neu k co mat dat o truoc va khoang trong phia truoc
             //neu khong thi neu la nguoi choi o tren va mat dat o tren
-
-
+            float directionVertical = Mathf.Sign(player.position.y - transform.position.y);
+            bool diffVertical = directionVertical > 0;
             //mat dat phia truoc theo huong cua nguoi choi
             RaycastHit2D groundInFront = Physics2D.Raycast(transform.position, new Vector2(direction, 0), 2f, groundLayer);
             //khoang trong
@@ -58,10 +58,10 @@ public class Enemy : MonoBehaviour
             //neu khong co ca khoang trong va dat phia truoc thi check tuong o tren xem co khong
             RaycastHit2D platformAbove = Physics2D.Raycast(transform.position, Vector2.up, 3f, groundLayer);
 
-            if(!groundInFront.collider && !gapAhead.collider)
+            if(!groundInFront.collider && !gapAhead.collider && diffVertical)
             {
                 shouldJump = true;
-            }else if(isPlayerAbove && platformAbove.collider)
+            }else if(isPlayerAbove && platformAbove.collider && diffVertical)
             {
                 shouldJump = true;
             }

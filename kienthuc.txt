@@ -127,3 +127,32 @@ UI -> create empty object -> add component: horizontal layoutgroup-> chuot phai
 +class HealUI
 + Ontrigger bat su kien va cham voi enemy thi tru mau
 + ham takedamage: -=damage, updateHeart
+
+
+12. GameOver
+- UI -> tao emptyObject-> chuot phai, UI, TextMP, Import, 
+- button -> chuot phai tai emptyObject -> UI -> Button TMP
+
+
+
+
+
+
+
+
+Hieu ve:
+public static event Action (using System) OnSomeAction;
+la chung ta se dang ky nhieu hoat dong o cac ham, cac lop khac nhau vao 1 hoat dong
+khi no duoc kich hoat.
+vidu:
+button Retry(thu choi lai game), gan su kien onClick va ham Reset dc goi
+public static event Action OnReset; cua ham GameController
+dkien kich hoat:
+ham Reset dc goi:
+Reset(){
+   OnReset.Invoke();
+}
+- cac ham da dang ky voi su kien OnReset:
+ + class SpawnObjectOnMap: ham nay de load 1 map moi de spawn, dang ki tai ham Start()
+ DKI: Start(): GameController.OnReset+=ChangeMap;
+=> khi nao ham Reset dc goi thi ham ChangeMap cung duoc goi.

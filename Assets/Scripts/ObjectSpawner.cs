@@ -33,6 +33,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         GatherValidPositions();//thu thap cac vi tri hop le
         StartCoroutine(SpawnObjectsIfNeeded());//spawn vao vi tri do
+        GameController.OnReset += ChangeTileMap;//khi nhan reset thi cung nhu thay doi tilemap nen phai change
     }
 
     // Update is called once per frame
