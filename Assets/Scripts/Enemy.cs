@@ -16,11 +16,29 @@ public class Enemy : MonoBehaviour
 
     public int damage = 1;
 
+
+    //xu li enemy trung dan
+    public int maxHealth = 3;
+    private int currentHealth;
+    private SpriteRenderer spriteRenderer;
+    private Color ogColor;
+
+
+    //loot item
+    [Header("Loot")]
+    public List<LootItem> lootTable = new List<LootItem>();
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        ogColor = spriteRenderer.color; ;
     }
 
     // Update is called once per frame
@@ -84,5 +102,52 @@ public class Enemy : MonoBehaviour
 
 
         }
+    }
+
+
+
+    //xu ly enemy nhan dame tu player
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        StartCoroutine(FlashBlack());
+        if (currentHealth <= 0)
+        {
+            //enemy die
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        //spawn item sau khi enemy chet
+        foreach(LootItem lootItem in lootTable)
+        {
+            if (Random.Range(0f, 100f) <= lootItem.dropChance)
+            {
+                InstantiateLootItem(lootItem.itemPrefab);
+                break;
+            }
+        }
+        Destroy(gameObject);
+    }
+
+
+    private void InstantiateLootItem(GameObject lootItem)
+    {
+        if (lootItem)
+        {
+            GameObject dropItem = Instantiate(lootItem, transform.position, Quaternion.identity);
+            dropItem.GetComponent<SpriteRenderer>().color = ogColor;
+            Destroy(dropItem, 10f);
+        }
+    }
+
+    private IEnumerator FlashBlack()
+    {
+        //Color color = spriteRenderer.color;
+        spriteRenderer.color = Color.black;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = ogColor;
     }
 }

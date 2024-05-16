@@ -131,11 +131,25 @@ UI -> create empty object -> add component: horizontal layoutgroup-> chuot phai
 
 12. GameOver
 - UI -> tao emptyObject-> chuot phai, UI, TextMP, Import, 
-- button -> chuot phai tai emptyObject -> UI -> Button TMP
+- button -> chuot phai tai emptyObject -> UI -> Button TMP-> add onclick
+-> gamecontroller->onreset
 
+tao gameobjec gameoverscreen trong gamecontroller
 
+13. Player Shoot
+-tao script playershoot cho player: chuc nang se gan bulletprefab vao de ban dan
+-tao script cho bullet: chuc nang la nhan ontriggerenter de enemy nhan damage va 
+detroy object dan
+-bo sung them vao scrip enemy cua enemy
++them maxheal cua enemy, currethealth de cap nhat mau, 3 mau se chet
++bo sung ham TakeDamage cho enemy, moi lan va cham voi dan se tru 1 mau
 
-
+14. loot table
+- tao 1 script LootItem de hien thi Itemprefab gan vao, chancedrop, phuc vu list
+- tao 1 prefab healthItem, gan script healthItem ke thua InterfaceItem, giong Gem
+- bo sung vao scrip enemy cua enemy
++ bien List LootItem: de keo tha cac item vao
++ bo sung ham Die cho enemy: trong ham nay se spawn ngau nhien item sau enemy die
 
 
 
@@ -156,3 +170,9 @@ Reset(){
  + class SpawnObjectOnMap: ham nay de load 1 map moi de spawn, dang ki tai ham Start()
  DKI: Start(): GameController.OnReset+=ChangeMap;
 => khi nao ham Reset dc goi thi ham ChangeMap cung duoc goi.
+
+
+
+
+
+

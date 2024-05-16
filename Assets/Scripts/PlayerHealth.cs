@@ -20,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         GameController.OnReset += ResetHealth;
+        HealthItem.OnHealthCollect += AddHeart;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,6 +31,18 @@ public class PlayerHealth : MonoBehaviour
             //nhan damage tu enemy
             TakeDamage(enemy.damage);
         }
+    }
+
+
+    //them mang khi nhat item mang tu quai 
+    private void AddHeart(int amount)
+    {
+        currentHealth += amount;
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        healthUI.UpdateHearts(currentHealth);
     }
 
 

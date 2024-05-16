@@ -200,7 +200,7 @@ public class ObjectSpawner : MonoBehaviour
             {
                 TileBase tile = allTiles[x + y * boundsInt.size.x];//cong thuc nay anh xa thu tu cua 1 o trong mang voi toa do 2d
                 //nom na la xet cac o trong mang theo toa do 2d tuong ung
-                if (tile != null)
+                if (tile != null && y>0)
                 {
                     //neu o do khong phai o rong thi vi tri xuat hien se nam sang phai 0.5f va tren 2f
                     Vector3 place = start + new Vector3(x + 0.5f, y + 1.5f, 0);
