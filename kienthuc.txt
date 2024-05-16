@@ -1,6 +1,6 @@
 unity platform
 
-1.lay dau vao cua unity bang cach:
+1.player movement: using input system
 windows->package manager->unity registry->search input system
 add component player input vao player -> create actions
 -> dat ten -> behavior invoke unity event
@@ -18,7 +18,7 @@ windows->package manager->unity registry->search cinemachine
 khi player bi gioi han di chuyen thi han che khoang chong camera bang cach
 click camera flow->add extension->cinamachine confiner-> no se co bounding(ghan)
 
-them 1 doi tuong r add component polygon collider2d de ghan camera, edit collider
+them 1 doi tuong confiner r add component polygon collider2d de ghan camera, edit collider
 
 
 3.add animation
@@ -51,3 +51,79 @@ click player-> chuot phai them effect->particel system
 
 6. UI progressbar: tien trinh thu thap gem
 - rightclick -> UI -> Slider
+
+
+7. them chuc nang nhay len se k bi va cham vao tilemap
+- add coponent platform effector 2D cho tilemap đó
+- tick used by effector trong composite collider trong tilemap do
+- geometry type -> chon polygons
+
+8. raycast se truyen 1 duong thang tu vi tri hien tai, huong + do dai toi collider
+rigibody.addForce
+
+9. event action cua system
+
+
+10.item spawn 
+- tao enum phan loai cac object nhu big,small,enemy
+- list object de luu cac object prefab, keo tha cac prefab vao unity editor
+- cac bien kha nang xuat hien cua gem, thoi gian ton tai, thoi gian xuat hien lai
+- cac list luu cac vi tri hop le de spawn, luu duoi dang vector3
+- cac lsit luu cac object co the spawn, toi da la xuat hien 5 object tren tilemap
+
+
+a. tim cac vi tri spawn hop le
+- ham GatherValidPositon(): de tim cac vi tri hop le de cho object spawn
+
+
+validSpawnPositions.Clear();//clear vi tri vi moi level lai la nhung vi tri khac nhau
+        BoundsInt boundsInt = tilemap.cellBounds;//khoanh vung tilemap thanh 1 hinh chu nhat
+        TileBase[] allTiles = tilemap.GetTilesBlock(boundsInt);//chuyen vung do thanh cac o 
+        Vector3 start = tilemap.CellToWorld(new Vector3Int(boundsInt.xMin, boundsInt.yMin, 0));//chuyen toa do khoanh vung sang toa do the gioi
+
+
+        for(int x = 0; x < boundsInt.size.x; x++)//duyet qua cac o theo chieu ngang
+        {
+            for(int y = 0; y < boundsInt.size.y; y++)//duyet qua cac o theo chieu doc
+            {
+                TileBase tile = allTiles[x + y * boundsInt.size.x];//cong thuc nay anh xa thu tu cua 1 o trong mang voi toa do 2d
+                //nom na la xet cac o trong mang theo toa do 2d tuong ung
+                if (tile != null)
+                {
+                    //neu o do khong phai o rong thi vi tri xuat hien se nam sang phai 0.5f va tren 2f
+                    Vector3 place = start + new Vector3(x + 0.5f, y + 2f, 0);
+                    validSpawnPositions.Add(place);//them vi tri co the xuat hien
+                }
+            }
+        }
+
+sau ham nay ta se duoc List cac vi tri hop le (vector3)
+
+b. sau khi tim duoc cac vi tri hop le thi sinh object thoi
+=> ham SpawnObject(): tuy nhien van phai check dkien k co obectect da xuat 
+hien tai vi do, tranh t/h 1 position nhieu object
+- tao cac bien sau:
+	+ spawnPosition=zero, luu vi tri sau khi da check xong cac dieu kien
+	+ bool validPositionFound=fasle; neu la true thi da tim thay vi tri thoa man
+- vong lap while de check xem vi tri do da xuat hien object chua
+	+ check theo cac bien rightPosition, leftPosition
+	+ check bang cach su dung list.any(lambla): rang neu co 1 phan tu trong list
+	thoa man dieu kien lambda thi tra ve true, k co tra ve false
+	+ dieu kien lap: validPosition=false, validSpawnPositionList.Count>0
+- sau khi thoat dc vong lap while thi da du dieu kien va validPositionFound=true
+=> sinh object theo random
+- neu object khong phai enemy thi tu detroy sau 10s
+
+11. health bar
+UI -> create empty object -> add component: horizontal layoutgroup-> chuot phai
+-> Image: chon image bieu hien mang player 
+- create script cho emptyobject vua tao: healthUI
+ + script nay se set lai max mang cho player va update moi khi player chet 1 mang
+ + public: Image heartPrefab, Sprite fullHeartSprite, Sprite emptySprite de keo tha
+ + 2 ham SetMaxHearts va UpdateHearts
+
+- tao 1 scrips cho player de cap nhat moi khi player chet: playerHealth
++ cac bien maxHeal de truyen vao cho healUI
++class HealUI
++ Ontrigger bat su kien va cham voi enemy thi tru mau
++ ham takedamage: -=damage, updateHeart
