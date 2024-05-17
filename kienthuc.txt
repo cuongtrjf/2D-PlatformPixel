@@ -152,6 +152,21 @@ detroy object dan
 + bo sung ham Die cho enemy: trong ham nay se spawn ngau nhien item sau enemy die
 
 
+15.Dashing
+-ve vet di chuyen bang cach them component trailrenderer cho player
+-cach nhan vat dash qua enemy k bi dinh damage
++ gan cac layer cho player va enemy lan luot la player va enemy
++ edit->project setting-> physic2d-> layer collision matrix: o day cung cap
+cac layer va cham voi nhau nhu the nao thong qua ma tran
++ physic2d.ignoreLayerCollision(layer1,layer2,true or false): bo qua va cham voi
+nhau neu la true va nguoc lai, layer1 va layer2 se tuong ung voi maxtric layer
+
+
+
+
+
+
+
 
 
 Hieu ve:

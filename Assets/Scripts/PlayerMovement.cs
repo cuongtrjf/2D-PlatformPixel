@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
+
+
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -14,6 +17,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
     float horizontalMovement;//chuyen dong ngang
+
+
+    [Header("Dashing")]
+    public float dashSpeed = 20f;//toc do dash
+    public float dashDuration = 0.1f;//thoi gian dash
+    public float dashCoolDown = 0.1f;//thoi gian hoi dash, tranh spam
+    bool isDashing;
+    bool canDash = true;
+    TrailRenderer trailRenderer;//render hoat anh vet sau khi nvan di chuyen
+
+
+
 
     [Header("Jumping")]
     public float jumpPower = 10f;
@@ -63,12 +78,21 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("yVelocity", rb.velocity.y);//xet cac dieu kien trong animator
+        animator.SetFloat("magnitude", rb.velocity.magnitude);
+        animator.SetBool("isWallSliding", isWallSliding);
+
+        if (isDashing)
+        {
+            return;//neu dang dash thi k the lam gi
+        }
+
         GroundCheck();
         Gravity();
         ProcessWallSlide();
@@ -78,11 +102,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);//di chuyen theo phuong ngang vi co trong luc
             Flip();
         }
-
-        animator.SetFloat("yVelocity", rb.velocity.y);
-        animator.SetFloat("magnitude", rb.velocity.magnitude);
-        animator.SetBool("isWallSliding", isWallSliding);
-
     }
 
 
@@ -93,6 +112,35 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMovement = context.ReadValue<Vector2>().x;//lay gia tri nhap lieu la 1 vector 
     }
+
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.performed && canDash)
+        {
+            StartCoroutine(DashCoroutine());
+        }
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        Physics2D.IgnoreLayerCollision(7, 8, true);//bo qua collision cua player(7) va enemy(8) khi va cham, neu la false thi se kich hoat lai
+        canDash = false;
+        isDashing = true;
+        trailRenderer.emitting = true;//emitting de bat tat render vet sau khi nhan vat di chuyen
+        float dashDirection = isFacingRight ? 1f : -1f;//neu dang quay ben phai thi bang 1 con k la -1
+        rb.velocity = new Vector2(dashDirection * dashSpeed, rb.velocity.y);
+
+        yield return new WaitForSeconds(dashDuration);
+        rb.velocity = new Vector2(0f, rb.velocity.y);//reset lai van toc ngang
+        isDashing = false;
+        trailRenderer.emitting = false;
+        Physics2D.IgnoreLayerCollision(7, 8, false);
+
+        yield return new WaitForSeconds(dashCoolDown);
+        canDash = true;
+    }
+
 
     public void Jump(InputAction.CallbackContext context)
     {
