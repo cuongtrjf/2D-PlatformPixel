@@ -170,6 +170,17 @@ nhau neu la true va nguoc lai, layer1 va layer2 se tuong ung voi maxtric layer
 + waitforsecounds thi boxcollider.enable=true
 
 
+17. di chuyen 1 platform de di chuyen nhan vat
+- tao 1 gameobject de luu cac object can thiet
++ tao 1 gameobject con ten la platform de luu platform, tao 1 scrip cho no
++ tao 1 gameobject de luu vitri A cua platform
++ tao 1 gameobject de luu vitriB cua platform
++ trong script, code di chuyen bang cach:
+	- tranform.position=vector3.movetoward(A,B,vantoc)
+	- de nhan vat co the k bi tuot khi platform di chuyen thi xet 
+	tranform.parent cua nhan vat = tranform cua platform, va neu xet thi
+	xet khi collison enter va collision exit
+
 
 
 
