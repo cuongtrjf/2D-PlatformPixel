@@ -162,7 +162,12 @@ cac layer va cham voi nhau nhu the nao thong qua ma tran
 nhau neu la true va nguoc lai, layer1 va layer2 se tuong ung voi maxtric layer
 
 
-
+16. drop player: ham nay giup nhan vat tuot xuong dat de roi xuong duoi 
+- them vao script playermovement ham drop goi S lam input
++ check k phai tang cuoi cung thi bien underground=false;
++ neu !underground, context.performed, isrground-> thuc hien ham
++ thuc hien ham bang cach cho boxcollider.eneble=false
++ waitforsecounds thi boxcollider.enable=true
 
 
 

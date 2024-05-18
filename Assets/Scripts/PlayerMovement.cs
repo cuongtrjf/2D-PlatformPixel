@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true;
     public Animator animator;
     public ParticleSystem smokeFX;
+    BoxCollider2D boxCollider;
 
 
 
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
     public LayerMask groundLayer;//mat dat
     private bool isGround;
+    private bool underGround;
 
 
     [Header("Gravity")]
@@ -79,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         trailRenderer = GetComponent<TrailRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -121,7 +124,6 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(DashCoroutine());
         }
     }
-
     private IEnumerator DashCoroutine()
     {
         Physics2D.IgnoreLayerCollision(7, 8, true);//bo qua collision cua player(7) va enemy(8) khi va cham, neu la false thi se kich hoat lai
@@ -140,6 +142,26 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashCoolDown);
         canDash = true;
     }
+
+
+
+    //tuot xuong ground
+    public void Drop(InputAction.CallbackContext context)
+    {
+        if(context.performed && isGround && !underGround)
+        {
+            StartCoroutine(DisableBoxCollider(0.25f));
+        }
+    }
+
+
+    private IEnumerator DisableBoxCollider(float timeDisable)
+    {
+        boxCollider.enabled = false;
+        yield return new WaitForSeconds(timeDisable);
+        boxCollider.enabled = true;
+    }
+
 
 
     public void Jump(InputAction.CallbackContext context)
@@ -188,6 +210,14 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpRemaining = maxJump;
             isGround = true;
+            if (transform.position.y > -4f)
+            {
+                underGround = false;
+            }
+            else
+            {
+                underGround = true;
+            }
         }
         else
         {
