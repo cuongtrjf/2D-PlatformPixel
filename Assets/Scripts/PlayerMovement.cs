@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheckPos;
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
     public LayerMask groundLayer;//mat dat
-    private bool isGround;
+    public bool isGround;
     private bool underGround;
 
 

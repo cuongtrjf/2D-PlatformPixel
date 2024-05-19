@@ -183,6 +183,24 @@ nhau neu la true va nguoc lai, layer1 va layer2 se tuong ung voi maxtric layer
 
 
 
+18. tao 1 platform nhan vat co the dung len va tu roi sau 1 thoi gian
+- tao 1 prefab trong do:
++ prefab nay se la platform co sprite platform do
++ rigibody de roi
++ boxcollider de nhan vat dung tren
++ script de xu ly va cham voi nhan vat:
+	- trong script: kiem tra oncollisionenter2d: neu va cham player thi roi
+	- roi bang cach rigibody.type=dynamic
+	- sau khi roi thi pha huy object do
+- tao 1 object co gan 1 script khac de xu ly viec respawn lai 
++ bien gameobject de keo prefab vao, currentObject de gan khi prefab dc khoi tao
++ public class ObjectDestroyer de goi su kien khi prefab bi destroy
++ ham createObject(): tao doi tuong va gan currenObject = doi tuong do
+	- current object se add component ObjectDestroy, dabg ky su kien goi ham
+	ReCreate de tao lai prefab
++ ham Start() se goi ham createObject de khoi tao
+
+
 
 
 Hieu ve:
