@@ -232,7 +232,22 @@ het tat ca vi sorting layer khac defalt
 
 
 
-
+20. audio
+- tao 1 object de chua 2 script xu ly la soundlibrary de tham chieu va luu giu sound
+va soundeffectmanage de quan ly xu ly sound, add component audiosource
+- soundlibrary:
++ co 1 dictionary dang key, list audio lam value, vi se random audio trong 1 key
++ tao 1 struct de tuong ung voi diction theo kieu du lieu: key, list audio
++ tao 1 list truct de tham chieu toi 1 diction cung nhu la list
++ awake(): khoi tao diction sounddiction: 
+forech(item trong list struct) soundiction[item.key]=item.listaudio
++ khoi tao xong thi random audio trong 1 list audio cua item de play
+- soundmanager:
++ singleton: soundeffectmanager: chi co 1 the hien duy nhat, co the goi bat ki dau
++ cac bien static: - audiosourec: getcomponent vi audiosourec cung trong component
+		   - soundeffectlibrary: tham chieu den script sounddiction
+		   - slider: gan slider vao
+- xem script de hieu hon
 
 
 

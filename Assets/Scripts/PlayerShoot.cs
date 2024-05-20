@@ -24,6 +24,7 @@ public class PlayerShoot : MonoBehaviour
         Vector3 shootDirection = (mousePosition - transform.position).normalized;//chuan hoa thanh vector don vi de mo ta huong tu vitri chuon den player
 
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        SoundEffectManager.Play("Shoot");
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(shootDirection.x, shootDirection.y) * bulletSpeed;//set toc do cua dan
         Destroy(bullet, 2f);
         

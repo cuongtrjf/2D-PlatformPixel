@@ -14,6 +14,7 @@ public class Gem : MonoBehaviour,InterfaceItem
     public void Collect()
     {
         OnGemCollect.Invoke(worth);//khi gem dc nhat thi no truyen gia tri worth vao, invoke la de kich hoat event nhat gem
+        SoundEffectManager.Play("Gem");
         Destroy(gameObject);//khi nhat thi xoa vat pham do di
     }
 }

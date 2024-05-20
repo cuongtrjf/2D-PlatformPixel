@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         {
             //nhan damage tu enemy
             TakeDamage(enemy.damage);
+            SoundEffectManager.Play("PlayerHit");
         }
 
         Trap trap = collision.GetComponent<Trap>();
@@ -37,6 +38,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(trap.damage);
             isTrap = true;
+        }
+        else if(trap && !isTrap && !transform.GetComponent<PlayerMovement>().isGround)
+        {
+            SoundEffectManager.Play("Bounce");
         }
     }
 

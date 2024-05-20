@@ -12,6 +12,7 @@ public class SpeedItem : MonoBehaviour,InterfaceItem
     public void Collect()
     {
         OnSpeedCollected.Invoke(multiSpeed);
+        SoundEffectManager.Play("Gem");
         Destroy(gameObject);
     }
 }

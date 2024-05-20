@@ -11,6 +11,7 @@ public class HealthItem : MonoBehaviour,InterfaceItem
     public void Collect()
     {
         OnHealthCollect.Invoke(healAmount);
+        SoundEffectManager.Play("Gem");
         Destroy(gameObject);
     }
 
