@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true;
     public Animator animator;
     public ParticleSystem smokeFX;
+    public ParticleSystem speedFX;
     BoxCollider2D boxCollider;
 
 
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
     float horizontalMovement;//chuyen dong ngang
+    float multiSpeed = 1f;
 
 
     [Header("Dashing")]
@@ -82,7 +84,25 @@ public class PlayerMovement : MonoBehaviour
     {
         trailRenderer = GetComponent<TrailRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+        SpeedItem.OnSpeedCollected += StartWithSpeedBoost;
     }
+
+
+    void StartWithSpeedBoost(float multiSpeedItem)
+    {
+        StartCoroutine(SpeedBoostCoroutine(multiSpeedItem));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float multi)
+    {
+        multiSpeed = multi;
+        speedFX.Play();
+        yield return new WaitForSeconds(4f);
+        multiSpeed = 1f;
+        speedFX.Stop();
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -103,10 +123,11 @@ public class PlayerMovement : MonoBehaviour
         ProcessWallJump();
         if (!isWallJumping)
         {
-            rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);//di chuyen theo phuong ngang vi co trong luc
+            rb.velocity = new Vector2(horizontalMovement * moveSpeed * multiSpeed, rb.velocity.y);//di chuyen theo phuong ngang vi co trong luc
             Flip();
         }
     }
+
 
 
 
@@ -296,6 +317,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 ls = transform.localScale;//lien quan den sprite
             ls.x *= -1f;//lat sprite
             transform.localScale = ls;
+            speedFX.transform.localScale = ls;
 
             if (rb.velocity.y == 0)
             {

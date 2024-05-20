@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
 
     public GameObject player;
     public GameObject loadCanvas;
-    public List<GameObject> levels;
+    public List<GameObject> levels = new List<GameObject>();
     private int currentLevelIndex = 0;
 
 

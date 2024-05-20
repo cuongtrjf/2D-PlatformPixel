@@ -10,7 +10,8 @@ public class ObjectSpawner : MonoBehaviour
     {
         SmallGem,
         BigGem,
-        Enemy
+        Enemy,
+        Speed
     }
 
     public Tilemap tilemap;
@@ -18,6 +19,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public float bigGemAbility = 0.2f;//kha nang xuat hien cua biggem
     public float enemyAbility = 0.1f;
+    public float speedAbility = 0.1f;
     public int maxObjects = 5;//so luong object toi da dang xuat hien
     public float gemLifeTime = 10f;//thoi gian ton tai cua gem
     public float spawnInterval = 0.5f;//thoi gian spawn lai sau khi bien mat
@@ -105,7 +107,11 @@ public class ObjectSpawner : MonoBehaviour
         if (randomChoice <= enemyAbility)
         {
             return ObjectType.Enemy;
-        } else if (randomChoice <= (enemyAbility + bigGemAbility))
+        } else if (randomChoice <= (enemyAbility + speedAbility))
+        {
+            return ObjectType.Speed;
+        }
+        else if (randomChoice <= (enemyAbility + bigGemAbility + speedAbility)) 
         {
             return ObjectType.BigGem;
         } else

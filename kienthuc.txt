@@ -200,6 +200,39 @@ nhau neu la true va nguoc lai, layer1 va layer2 se tuong ung voi maxtric layer
 	ReCreate de tao lai prefab
 + ham Start() se goi ham createObject de khoi tao
 
+19. tao 1 hidden area khi player di chuyen vao se hien thi khu vuc do, k thi se 
+an no di
+- tao 1 gameobject ten la hidden area, sprite la 1 square co kich thuoc bao phu
+- sprite nay se co mau la mau nen cua background
+- sorting layer theo 1 cai moi khac defalt de hien len tren het tat ca
+- add boxcollider va istrigger de xet va cham
+- them scripte de xu ly va chan
++ scrip nay co chuc nang render sprite theo alpha
++ neu nhan vat va cham voi collider cua sprite thi alpha=0, tuc la trong suot
++ neu thoat ra va cham thi spriterender.color= mau hien tai, khi co mau no se che
+het tat ca vi sorting layer khac defalt
++ de xu ly viec nay muot ma thi bien Coroutine de chay theo tung Coroutine
++ vi du ham OntriggerEnter se the nay, tuong tu voi onexit
+	private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        { 
+            if(currentCoroutine != null)
+            {
+                StopCoroutine(currentCoroutine);
+            }
+            currentCoroutine = StartCoroutine(FadeSprite(true));
+        }
+    }
++ ham FadeSprite se render mau cua sprite theo timeFading
+	- dat trong vong while (timeFading<fadingDuration)//tao hieuung hien ra tutu
+	- timeFading+=deltaTime
+	- spriterender.color= color.lefp(maubandau,maudich,hieuso=timeFading/timeDur)
+	- dat yiel return null trong while de no co tang dung cap nhat nhu Update
+
+
+
+
 
 
 

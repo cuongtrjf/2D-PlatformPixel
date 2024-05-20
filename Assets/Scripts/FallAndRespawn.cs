@@ -13,6 +13,7 @@ public class FallAndRespawn : MonoBehaviour
     {
         // Khoi tao doi tuong 
         CreateObject();
+        GameController.OnReset += ResetState;
     }
 
     void CreateObject()
@@ -45,6 +46,11 @@ public class FallAndRespawn : MonoBehaviour
         stateSpawn = false;
         yield return new WaitForSeconds(timeReSpawn);
         CreateObject();
+    }
+
+    void ResetState()
+    {
+        stateSpawn = true;
     }
 }
 

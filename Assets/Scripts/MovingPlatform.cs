@@ -15,6 +15,7 @@ public class MovingPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameController.OnReset +=ResetPosition;
         nextPosition = pointB.position;
         canChange = true;
     }
@@ -61,6 +62,11 @@ public class MovingPlatform : MonoBehaviour
                 collision.gameObject.transform.parent = null;//neu thoat collision thi xet lai thanh null de doc lap position
             }
         }
+    }
+
+    void ResetPosition()
+    {
+        canChange = true;
     }
 
 }
