@@ -93,6 +93,7 @@ public class GameController : MonoBehaviour
         levels[levelNext].gameObject.SetActive(true);
 
         player.transform.position = new Vector3(0, 0, 0);
+        player.GetComponent<SpriteRenderer>().color= new Color32(216, 134, 217, 255);
         currentLevelIndex = levelNext;
 
 

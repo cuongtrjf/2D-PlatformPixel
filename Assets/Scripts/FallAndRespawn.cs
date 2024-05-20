@@ -19,6 +19,7 @@ public class FallAndRespawn : MonoBehaviour
     {
         stateSpawn = true;
         currentObject = Instantiate(fallingPlatformPrefab, transform.position, Quaternion.identity);
+        currentObject.transform.parent = transform;
         // ??ng ký s? ki?n khi ??i t??ng b? h?y
         //ObjectDestroyer destroyer = currentObject.AddComponent<ObjectDestroyer>();
         //if(destroyer != null)
@@ -29,7 +30,7 @@ public class FallAndRespawn : MonoBehaviour
 
     private void Update()
     {
-        if (currentObject == null && stateSpawn)
+        if (currentObject == null && stateSpawn && transform.parent != null)
         {
             StartCoroutine(RecreateObject());
         }

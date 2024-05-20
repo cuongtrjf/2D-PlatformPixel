@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public HealthUI healthUI;
 
     private SpriteRenderer spriteRenderer;
-
+    private bool isTrap;
     public static event Action OnPlayedDied;
 
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     {
         ResetHealth();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        isTrap = false;
         GameController.OnReset += ResetHealth;
         HealthItem.OnHealthCollect += AddHeart;
     }
@@ -31,6 +31,18 @@ public class PlayerHealth : MonoBehaviour
             //nhan damage tu enemy
             TakeDamage(enemy.damage);
         }
+
+        Trap trap = collision.GetComponent<Trap>();
+        if (trap && trap.damage > 0 && !isTrap)
+        {
+            TakeDamage(trap.damage);
+            isTrap = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isTrap = false;
     }
 
 

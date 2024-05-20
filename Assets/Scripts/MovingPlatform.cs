@@ -41,19 +41,25 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (gameObject.activeInHierarchy)
         {
-            collision.gameObject.transform.parent = transform;//neu nhan vat dang dung tren platform thi xet nhan vat lam con cua platform
-            //dieu nay de nhan vat di chuyen cung platform luon, khong bi truot ra khoi platform
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.transform.parent = transform;//neu nhan vat dang dung tren platform thi xet nhan vat lam con cua platform
+                //dieu nay de nhan vat di chuyen cung platform luon, khong bi truot ra khoi platform
+            }
         }
     }
 
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if(gameObject.activeInHierarchy)
         {
-            collision.gameObject.transform.parent = null;//neu thoat collision thi xet lai thanh null de doc lap position
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.transform.parent = null;//neu thoat collision thi xet lai thanh null de doc lap position
+            }
         }
     }
 

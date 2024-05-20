@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     public float jumpPower = 10f;
     public int maxJump = 2;
-    private int jumpRemaining;
+    public int jumpRemaining;
 
 
     [Header("GroundCheck")]
@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);//xet cac dieu kien trong animator
         animator.SetFloat("magnitude", rb.velocity.magnitude);
         animator.SetBool("isWallSliding", isWallSliding);
+
 
         if (isDashing)
         {
@@ -228,7 +229,7 @@ public class PlayerMovement : MonoBehaviour
     //xy ly trong luc roi nhan vat khi nhay
     public void Gravity()
     {
-        if (rb.velocity.y < 0)//khi nhan vat dang roi
+        if (rb.velocity.y < 0 && !isGround)//khi nhan vat dang roi
         {
             rb.gravityScale = baseGravity * fallSpeedMultiplier;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -maxFallSpeed));//gioi han van toc roi cua nhan vat va vi tri roi
