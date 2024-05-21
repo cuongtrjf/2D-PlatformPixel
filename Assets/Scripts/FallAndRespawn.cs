@@ -14,6 +14,7 @@ public class FallAndRespawn : MonoBehaviour
         // Khoi tao doi tuong 
         CreateObject();
         GameController.OnReset += ResetState;
+        GameController.OnRestart += ResetState;
     }
 
     void CreateObject()

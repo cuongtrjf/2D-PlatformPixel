@@ -15,7 +15,8 @@ public class MovingPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameController.OnReset +=ResetPosition;
+        GameController.OnReset += ResetPosition;
+        GameController.OnRestart += ResetPosition;
         nextPosition = pointB.position;
         canChange = true;
     }

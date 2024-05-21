@@ -8,12 +8,15 @@ public class ItemHidden : MonoBehaviour
 
     private void Start()
     {
-        Spawn();
+        Instantiate(heartHidden,transform.position,Quaternion.identity);
         GameController.OnReset += Spawn;
+        GameController.OnRestart += Spawn;
     }
 
     void Spawn()
     {
+        if (gameObject != null)
+            return;
         Instantiate(heartHidden, transform.position, Quaternion.identity);
     }
 }

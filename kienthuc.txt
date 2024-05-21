@@ -249,6 +249,10 @@ forech(item trong list struct) soundiction[item.key]=item.listaudio
 		   - slider: gan slider vao
 - xem script de hieu hon
 
+21. music cho game: tuong tu nhu sfx audio, xem scrip de hieu hon
+22. scence menu:
+- tao 1 scence moi ten la start trong folder scence 
+
 
 
 Hieu ve:

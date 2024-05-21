@@ -17,6 +17,7 @@ public class HiddenArea : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         hiddenColor = spriteRenderer.color;
         GameController.OnReset += ResetAlpla;
+        GameController.OnRestart += ResetAlpla;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

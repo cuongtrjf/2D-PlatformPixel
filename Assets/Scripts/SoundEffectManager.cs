@@ -7,7 +7,7 @@ public class SoundEffectManager : MonoBehaviour
 {
     private static SoundEffectManager instance;
     //tao 1 the hien duy nhat
-    private static AudioSource audioSource;
+    private static AudioSource audioSource;//1 thanh phan trong component de dieu khien audioclip(1 dai dien cho am thanh dc gan vao)
     private static SoundEffectLibrary soundEffectLibrary;
     [SerializeField] private Slider sfxSlider;
 

@@ -20,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         isTrap = false;
         GameController.OnReset += ResetHealth;
+        GameController.OnRestart += ResetHealth;
         HealthItem.OnHealthCollect += AddHeart;
     }
 

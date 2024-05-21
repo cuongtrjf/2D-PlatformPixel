@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -18,9 +19,12 @@ public class GameController : MonoBehaviour
 
 
     public static event Action OnReset;
+    public static event Action OnRestart;
+
 
     //game over or surrival level
     public GameObject gameOverScreen;
+    public GameObject pauseScreen;
     public TMP_Text passLvText;
     private int passLvCount;
 
@@ -39,6 +43,7 @@ public class GameController : MonoBehaviour
         loadCanvas.SetActive(false);
 
         gameOverScreen.SetActive(false);
+        pauseScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,6 +55,7 @@ public class GameController : MonoBehaviour
     public void ResetGame()
     {
         gameOverScreen.SetActive(false);
+        MusicManager.PlayerBackgroundMusic(true);//reset lai bai hat
         passLvCount = 0;//reset choi lai tu dau
         LoadLevel(0, false);
         OnReset.Invoke();
@@ -62,6 +68,7 @@ public class GameController : MonoBehaviour
     private void GameOverScreen()
     {
         gameOverScreen.SetActive(true);
+        MusicManager.PauseBackgroundMusic();
         passLvText.text = "PASS " + passLvCount + " LEVEL";
         if (passLvCount > 1)
         {
@@ -109,5 +116,46 @@ public class GameController : MonoBehaviour
         int nextLevelIndex = (currentLevelIndex == levels.Count - 1) ? 0 : currentLevelIndex + 1;
 
         LoadLevel(nextLevelIndex,true);
+    }
+
+
+
+    public void OnPause()
+    {
+        pauseScreen.SetActive(true);
+        MusicManager.PauseBackgroundMusic();
+        Time.timeScale = 0;
+    }
+
+    public void OnContinue()
+    {
+        pauseScreen.SetActive(false);
+        MusicManager.PlayerBackgroundMusic(false);
+        Time.timeScale = 1;
+    }
+
+
+    public void OnClickRestart()
+    {
+        pauseScreen.SetActive(false);
+        MusicManager.PlayerBackgroundMusic(true);
+        Time.timeScale = 1;
+        //passLvCount = currentLevelIndex;
+        OnRestart.Invoke();
+        RestartLevel();
+    }
+
+    public void RestartLevel()
+    {
+        LoadLevel(currentLevelIndex,false);
+    }
+
+
+    public void OnExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif 
+        Application.Quit();
     }
 }
