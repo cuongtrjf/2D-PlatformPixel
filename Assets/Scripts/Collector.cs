@@ -22,6 +22,8 @@ public class Collector : MonoBehaviour
         StartCoroutine(SetStateCollect());
     }
 
+
+
     IEnumerator SetStateCollect()
     {
         yield return new WaitForSeconds(0.00001f);

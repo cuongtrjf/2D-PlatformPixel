@@ -91,7 +91,7 @@ public class ObjectSpawner : MonoBehaviour
 
     //SPAWN POSTION FOR OBJECT
 
-    private bool PositionHasObject(Vector3 positionToCheck)
+    private bool PositionHasObject(Vector3 positionToCheck)//check xem co object nao gan vitri position k
     {
         //ham duoi kiem tra xem trong list spawnObject co phan tu nao thoa man dieu kien trong ngoac hay khong, tra ve true and false
         //bieu thuc trong ngoac la 1 bieu thuc lambla, no co nghia la
@@ -119,9 +119,11 @@ public class ObjectSpawner : MonoBehaviour
             return ObjectType.SmallGem;
     }
 
-    private void SpawnObject()
+
+
+    private void SpawnObject()//spawn object theo vi tri da tim thay co the spawn dc (vitri hop le va chua xuat hien item ben canh)
     {
-        if (validSpawnPositionsList.Count == 0)//neu vi tri co the spawn bang 0 thi k spawn nua 
+        if (validSpawnPositionsList.Count == 0)//neu da het vitri co the spawn
         {
             return;
         }
@@ -148,6 +150,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             ObjectType objectType = RandomObjectType();
             GameObject gameObject = Instantiate(objectPrefabsList[(int)objectType], spawnPosition, Quaternion.identity);
+            gameObject.transform.parent = transform;
             spawnObjectsList.Add(gameObject);
         
             //destroy object after time
@@ -160,7 +163,7 @@ public class ObjectSpawner : MonoBehaviour
 
 
 
-    private IEnumerator DestroyObjectAfterTime(GameObject gameObject,float time)
+    private IEnumerator DestroyObjectAfterTime(GameObject gameObject,float time)//object tu bi pha huy sau 1 tgian neu player k collect, listposition add vtri do
     {
         yield return new WaitForSeconds(time);
         if (gameObject)
@@ -175,7 +178,7 @@ public class ObjectSpawner : MonoBehaviour
 
 
 
-    private void DestroyAllSpawnObjects()
+    private void DestroyAllSpawnObjects()//pha huy tat ca object de giai phong bo nho sau khi doi map
     {
         foreach(GameObject obj in spawnObjectsList)
         {

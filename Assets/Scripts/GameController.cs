@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
     int progressAmount;//tien do nhat gem
     public Slider progressSlider;//thanh tien do level
 
-
     public GameObject player;
     public GameObject loadCanvas;
     public List<GameObject> levels = new List<GameObject>();
@@ -25,6 +24,7 @@ public class GameController : MonoBehaviour
     //game over or surrival level
     public GameObject gameOverScreen;
     public GameObject pauseScreen;
+    public GameObject completeScreen;
     public TMP_Text passLvText;
     private int passLvCount;
 
@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
 
         gameOverScreen.SetActive(false);
         pauseScreen.SetActive(false);
+        completeScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -114,12 +115,36 @@ public class GameController : MonoBehaviour
     private void LoadNextLevel()
     {
         //neu level hien tai chua phai level cuoi chua, neu roi thi level tiep theo bang 1, con k thi bang lv +1
-        int nextLevelIndex = (currentLevelIndex == levels.Count - 1) ? 0 : currentLevelIndex + 1;
-
-        LoadLevel(nextLevelIndex,true);
+        //int nextLevelIndex = (currentLevelIndex == levels.Count - 1) ? 0 : currentLevelIndex + 1;
+        //LoadLevel(nextLevelIndex,true);
+        if(currentLevelIndex == levels.Count - 1)//level cuoi
+        {
+            StartCoroutine(ActiveScreenComplete());
+        }
+        else
+        {
+            LoadLevel(currentLevelIndex + 1, true);
+        }
     }
 
+    IEnumerator ActiveScreenComplete()
+    {
+        //ham active
+        yield return new WaitForSeconds(1f);
+        completeScreen.SetActive(true);
+        Time.timeScale = 0;
+    }
 
+    public void PlayAgain()
+    {
+        completeScreen.SetActive(false);
+        MusicManager.PlayerBackgroundMusic(true);//reset lai bai hat
+        passLvCount = 0;//reset choi lai tu dau
+        LoadLevel(0, false);
+        OnReset.Invoke();
+
+        Time.timeScale = 1;//thoi gian tiep tuc
+    }
 
     public void OnPause()
     {

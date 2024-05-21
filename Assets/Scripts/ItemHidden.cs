@@ -22,7 +22,7 @@ public class ItemHidden : MonoBehaviour
         }
     }
 
-    void SetFalseState()
+    void SetFalseState()//thiet lap state thay doi khi rest hay restart dc goi
     {
         activeState = false;
     }
@@ -32,6 +32,6 @@ public class ItemHidden : MonoBehaviour
     {
         activeState = true;
         currentItem = Instantiate(heartHidden, transform.position, Quaternion.identity);
-        currentItem.transform.parent = transform;
+        currentItem.transform.parent = transform;//cap nhat lai vitri cua currentItem vi khi reset hoac restart, vi tri spawn se khac nhau theo map
     }
 }

@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool shouldJump;
-
+              
     public int damage = 1;
 
 
@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour
     public List<LootItem> lootTable = new List<LootItem>();
 
 
+
+      
 
 
     // Start is called before the first frame update
