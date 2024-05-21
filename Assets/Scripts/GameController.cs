@@ -94,6 +94,7 @@ public class GameController : MonoBehaviour
 
     private void LoadLevel(int levelNext,bool stateCompleteLV)
     {
+        player.transform.parent = null;
         loadCanvas.SetActive(false);//thanh tai level
 
         levels[currentLevelIndex].gameObject.SetActive(false);

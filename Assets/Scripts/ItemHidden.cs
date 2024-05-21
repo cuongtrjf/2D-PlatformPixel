@@ -5,18 +5,33 @@ using UnityEngine;
 public class ItemHidden : MonoBehaviour
 {
     public GameObject heartHidden;
+    private GameObject currentItem;
+    private bool activeState;
 
     private void Start()
     {
-        Instantiate(heartHidden,transform.position,Quaternion.identity);
-        GameController.OnReset += Spawn;
-        GameController.OnRestart += Spawn;
+        Create();
+        GameController.OnReset += SetFalseState;
+        GameController.OnRestart += SetFalseState;
+    }
+    private void Update()
+    {
+        if (!activeState && currentItem == null)
+        {
+            Create();
+        }
     }
 
-    void Spawn()
+    void SetFalseState()
     {
-        if (gameObject != null)
-            return;
-        Instantiate(heartHidden, transform.position, Quaternion.identity);
+        activeState = false;
+    }
+
+
+    private void Create()
+    {
+        activeState = true;
+        currentItem = Instantiate(heartHidden, transform.position, Quaternion.identity);
+        currentItem.transform.parent = transform;
     }
 }
