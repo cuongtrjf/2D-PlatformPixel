@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("yVelocity", rb.velocity.y);//xet cac dieu kien trong animator
         animator.SetFloat("magnitude", rb.velocity.magnitude);
         animator.SetBool("isWallSliding", isWallSliding);
-
+        animator.SetBool("isGround", isGround);
 
         if (isDashing)
         {
@@ -135,7 +135,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)//khi co su nhap lieu se duoc goi context
     {
-        horizontalMovement = context.ReadValue<Vector2>().x;//lay gia tri nhap lieu la 1 vector 
+        horizontalMovement = context.ReadValue<Vector2>().x;//lay gia tri nhap lieu la 1 vector
+        animator.SetFloat("isWalking", Math.Abs(horizontalMovement));
     }
 
 

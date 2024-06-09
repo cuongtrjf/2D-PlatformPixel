@@ -9068,6 +9068,10 @@ PrefabInstance:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 783807652}
+    - target: {fileID: 1828784060, guid: e8ba97090c466494997555c0b9b39503, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2075475030, guid: e8ba97090c466494997555c0b9b39503, type: 3}
       propertyPath: m_Camera
       value: 
